@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="me.gacl.mapping.userMapper"就是me.gacl.mapping(包名)+userMapper(userMapper.xml文件去除后缀)
+ -->
+<mapper namespace="mapper.accountDealMapper">
+
+   <select id="selectAllRecharge" parameterType="String" resultType="java_all.mybatis_domin.mapper_class.AccountDeal">
+       SELECT * FROM tb_account_deal WHERE accountId = #{accountId} and dealType = 0
+   </select>
+
+    <select id="selectAllWithdraw" parameterType="String" resultType="java_all.mybatis_domin.mapper_class.AccountDeal">
+        SELECT * FROM tb_account_deal WHERE accountId = #{accountId} and dealType = 1
+    </select>
+
+    <select id="selectAllTransfer" parameterType="String" resultType="java_all.mybatis_domin.mapper_class.AccountDeal">
+        SELECT * FROM tb_account_deal WHERE accountId = #{accountId} and dealType = 2
+    </select>
+
+    <select id="selectOneRcharge" parameterType="String" resultType="java_all.mybatis_domin.mapper_class.AccountDeal">
+        SELECT * FROM tb_account_deal WHERE orderNo = #{orderNo} and dealType = 0
+    </select>
+
+    <select id="selectOneWithdraw" parameterType="String" resultType="java_all.mybatis_domin.mapper_class.AccountDeal">
+        SELECT * FROM tb_account_deal WHERE orderNo = #{orderNo} and dealType = 1
+    </select>
+
+    <select id="selectOneTransfer" parameterType="String" resultType="java_all.mybatis_domin.mapper_class.AccountDeal">
+        SELECT * FROM tb_account_deal WHERE orderNo = #{orderNo} and dealType = 2
+    </select>
+
+    <select id="selectBySize" parameterType="java_all.mybatis_domin.mapper_class.AccountDealQuery"
+            resultType="java_all.mybatis_domin.mapper_class.AccountDeal">
+        SELECT * FROM tb_account_deal  WHERE accountId = #{accountId} AND dealType = #{dealType} ORDER BY dealTime desc
+        limit #{startIndex},#{queryLength}
+    </select>
+
+    <select id="selectAllBySize" parameterType="java_all.mybatis_domin.mapper_class.AccountDealQuery"
+            resultType="java_all.mybatis_domin.mapper_class.AccountDeal">
+        SELECT * FROM tb_account_deal  WHERE accountId = #{accountId} ORDER BY dealTime desc
+        limit #{startIndex},#{queryLength}
+    </select>
+
+
+    <insert id="insertAccountDeal" parameterType="java_all.mybatis_domin.mapper_class.AccountDeal">
+        INSERT INTO tb_account_deal(accountId, dealTime, amount, bankNo, name, toAccountId, toBankNo,
+        toName, dealType, des, orderNo, payType, transferType, status,bankName,toBankName) VALUES (#{accountId}, #{dealTime},
+        #{amount}, #{bankNo}, #{name}, #{toAccountId}, #{toBankNo}, #{toName}, #{dealType},
+        #{des}, #{orderNo}, #{payType}, #{transferType}, #{status},#{bankName}, #{toBankName})
+    </insert>
+
+    <select id="selectByTime" parameterType="java_all.mybatis_domin.mapper_class.AccountDealQuery"
+            resultType="java_all.mybatis_domin.mapper_class.AccountDeal">
+        SELECT  * FROM tb_account_deal WHERE accountId = #{accountId} AND dealType = #{dealType} AND
+        dealTime BETWEEN #{startTime} AND #{endTime}
+    </select>
+
+
+
+</mapper>

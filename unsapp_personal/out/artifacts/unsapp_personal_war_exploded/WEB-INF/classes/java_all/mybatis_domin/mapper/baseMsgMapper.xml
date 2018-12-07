@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="me.gacl.mapping.userMapper"就是me.gacl.mapping(包名)+userMapper(userMapper.xml文件去除后缀)
+ -->
+<mapper namespace="mapper.baseMsgMapper">
+
+
+    <select id="getBaseMsgByAccountId" parameterType="String"
+            resultType="java_all.mybatis_domin.mapper_class.BaseMsg">
+        select * from tb_base_msg where accountId=#{accountId}
+    </select>
+
+    <select id="getBaseMsgByTel" parameterType="String"
+            resultType="java_all.mybatis_domin.mapper_class.BaseMsg">
+      select * from tb_base_msg where tel=#{tel}
+    </select>
+
+    <insert id="insertRegisterMsg" parameterType="java_all.mybatis_domin.mapper_class.BaseMsg">
+       insert into tb_base_msg(tel,pwd,accountId) values (#{tel},#{pwd},#{accountId})
+    </insert>
+
+    <update id="updateBaseMsg" parameterType="java_all.mybatis_domin.mapper_class.BaseMsg">
+      update tb_base_msg set name=#{name},sex=#{sex},identityId=#{identityId},birthday=#{birthday},
+      constellation = #{constellation}, nickname = #{nickname}, email = #{email}, gesturesPwd = #{gesturesPwd},
+      headPortraitImage = #{headPortraitImage}, height = #{height}, weight = #{weight}, region = #{region},
+      professional = #{professional}, income = #{income}
+      where accountId = #{accountId}
+    </update>
+
+    <update id="updateLoginTime" parameterType="java_all.mybatis_domin.mapper_class.BaseMsg">
+        UPDATE  tb_base_msg SET loginTime=#{loginTime} WHERE accountId = #{accountId}
+    </update>
+
+    <update id="updatePwdErrorNum" parameterType="java_all.mybatis_domin.mapper_class.BaseMsg">
+        UPDATE  tb_base_msg SET  pwdErrorNum = #{pwdErrorNum}  WHERE  accountId = #{accountId}
+    </update>
+
+    <update id="updateConstellation" parameterType="java_all.mybatis_domin.mapper_class.BaseMsg">
+        UPDATE tb_base_msg SET constellation = #{constellation} WHERE accountId=#{accountId}
+    </update>
+
+
+</mapper>

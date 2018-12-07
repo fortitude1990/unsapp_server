@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="me.gacl.mapping.userMapper"就是me.gacl.mapping(包名)+userMapper(userMapper.xml文件去除后缀)
+ -->
+<mapper namespace="mapper.accountIdStorageMapper">
+
+
+    <select id="getValid" parameterType="int"
+            resultType="java_all.mybatis_domin.mapper_class.AccountIdStorage">
+        select * from tb_accountid_storage where valid=#{valid} order by rand() limit 1
+    </select>
+
+    <update id="updateValid" parameterType="java_all.mybatis_domin.mapper_class.AccountIdStorage">
+        UPDATE tb_accountid_storage set valid=#{valid} WHERE accountId=#{accountId}
+    </update>
+
+
+</mapper>

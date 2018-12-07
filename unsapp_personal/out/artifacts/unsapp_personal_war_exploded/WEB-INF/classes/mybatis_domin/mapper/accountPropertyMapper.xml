@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="me.gacl.mapping.userMapper"就是me.gacl.mapping(包名)+userMapper(userMapper.xml文件去除后缀)
+ -->
+<mapper namespace="mapper.accountProperty">
+
+   <select id="allMessage" parameterType="String" resultType="java_all.mybatis_domin.mapper_class.AccountProperty">
+       SELECT * FROM tb_account_property WHERE accountId = #{accountId}
+   </select>
+
+   <insert id="insertPassword" parameterType="java_all.mybatis_domin.mapper_class.AccountProperty" >
+       INSERT INTO tb_account_property(accountId,payPwd) VALUES (#{accountId},#{payPwd})
+   </insert>
+
+    <update id="updatePassword" parameterType="java_all.mybatis_domin.mapper_class.AccountProperty">
+        UPDATE tb_account_property SET payPwd = #{payPwd} WHERE accountId=#{accountId}
+    </update>
+
+    <insert id="insertProperty" parameterType="java_all.mybatis_domin.mapper_class.AccountProperty">
+        INSERT INTO tb_account_property(accountId, totalProperty, availableProperty, 
+        updateTime,monthlySpending,monthlyIncome, yesterdayIncome, yesterdaySpending) VALUES
+        (#{accountId}, #{totalProperty}, #{availableProperty}, #{updateTime},#{monthlySpending},#{monthlyIncome},
+         #{yesterdayIncome}, #{yesterdaySpending})
+    </insert>
+
+    <update id="updateProperty" parameterType="java_all.mybatis_domin.mapper_class.AccountProperty">
+        UPDATE tb_account_property SET totalProperty = #{totalProperty},availableProperty = #{availableProperty},
+        monthlyIncome = #{monthlyIncome}, monthlySpending = #{monthlySpending}, updateTime = #{updateTime},
+        yesterdaySpending = #{yesterdaySpending}, yesterdayIncome = #{yesterdayIncome}
+        WHERE accountId = #{accountId}
+    </update>
+
+    <update id="updateMonthlySpendingOrMonthlyIncome" parameterType="java_all.mybatis_domin.mapper_class.AccountProperty">
+        UPDATE tb_account_property SET monthlyIncome = #{monthlyIncome}, monthlySpending = #{monthlySpending}
+        WHERE accountId = #{accountId}
+    </update>
+
+
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="me.gacl.mapping.userMapper"就是me.gacl.mapping(包名)+userMapper(userMapper.xml文件去除后缀)
+ -->
+<mapper namespace="mapper.accountBankCardMapper">
+
+   <select id="allBankCard" parameterType="String" resultType="java_all.mybatis_domin.mapper_class.AccountBankCard">
+       SELECT * FROM tb_account_bankcard WHERE accountId = #{accountId}
+   </select>
+
+    <select id="selectOneBankCard" parameterType="String" resultType="java_all.mybatis_domin.mapper_class.AccountBankCard">
+        SELECT * FROM tb_account_bankcard WHERE bankNo = #{bankNo}
+    </select>
+
+    <insert id="insertBankCard" parameterType="java_all.mybatis_domin.mapper_class.AccountBankCard" >
+        INSERT INTO tb_account_bankcard(accountId, bankNo, bankName, bankCode, bankAboutMobile, name,cardType)
+        VALUES (#{accountId}, #{bankNo}, #{bankName}, #{bankCode}, #{bankAboutMobile}, #{name}, #{cardType})
+    </insert>
+
+    <delete id="deleteBankCard" parameterType="String">
+        DELETE FROM tb_account_bankcard WHERE bankNo = #{bankNo}
+    </delete>
+
+
+</mapper>
